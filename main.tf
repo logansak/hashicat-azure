@@ -77,9 +77,9 @@ resource "azurerm_network_security_group" "catapp-sg" {
 }
 
 resource "azurerm_network_interface" "catapp-nic" {
-  name                      = "${var.prefix}-catapp-nic"
-  location                  = var.location
-  resource_group_name       = azurerm_resource_group.myresourcegroup.name
+  name                = "${var.prefix}-catapp-nic"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.myresourcegroup.name
 
   ip_configuration {
     name                          = "${var.prefix}ipconfig"
@@ -107,6 +107,7 @@ resource "azurerm_virtual_machine" "catapp" {
   location            = var.location
   resource_group_name = azurerm_resource_group.myresourcegroup.name
   vm_size             = var.vm_size
+  Billable            = "true"
 
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
